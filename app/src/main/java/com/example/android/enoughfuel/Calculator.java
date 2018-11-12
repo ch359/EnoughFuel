@@ -17,7 +17,7 @@ public class Calculator {
 
     public double fuelUse() {
         double fuelNeeded = distance / car.getMpg();
-        return (fuelNeeded / car.getFuelTankCapacityInGallons()) * 100;
+        return (fuelNeeded / car.getFuelTankInGallons()) * 100;
     }
 
 

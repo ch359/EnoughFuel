@@ -1,6 +1,5 @@
 package com.example.android.enoughfuel;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,16 +8,11 @@ import java.util.Map;
 public class Car {
 
     private String name;
-    private double capacity;
-    private String units;
-    private double fuelTankCapacityInGallons;
-
+    Map<String, Double> fuelTank;
     private double mpg;
 
     public Car(double capacity, String units) {
-        fuelTankCapacityInGallons = capacity;
-        this.capacity = capacity;
-        this.units = units;
+        fuelTank = Conversions.storeFuelTankCapacity(capacity, units);
         this.name = "Nissan Micra";
         this.mpg = 30;
 
@@ -28,15 +22,31 @@ public class Car {
         return name;
     }
 
-    public double getFuelTankCapacityInGallons() {
-        return fuelTankCapacityInGallons;
+    public double getFuelTankInGallons() {
+        String units = "gallons";
+        return fuelTank.get(units);
+    }
+
+    public double getFuelTankInLitres() {
+        String units = "litres";
+        return fuelTank.get(units);
     }
 
     public double getMpg() {
         return mpg;
     }
 
-    public String getFuelTankCapacity() {
-        return capacity + " " + units;
+    public String displayFuelTankCapacity(String units) {
+        switch (units) {
+            case "gallons":
+                return getFuelTankInGallons() + " " + units;
+
+            case "litres":
+                return getFuelTankInLitres() + " " + units;
+
+        }
+        return null;
+
     }
+
 }

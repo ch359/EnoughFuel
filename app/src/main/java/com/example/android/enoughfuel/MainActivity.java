@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         carTank = (TextView) findViewById(R.id.fuelTankSize);
         car = new Car(7, "gallons");
         carName.setText(car.getName());
-        carTank.setText(car.getFuelTankCapacity());
+        carTank.setText(car.displayFuelTankCapacity("gallons"));
         enterDistance = (TextView) findViewById(R.id.enterDistance);
     }
 
