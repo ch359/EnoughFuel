@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Enough Fuel?</string>
+    <string-array name="distance_units">
+        <item>miles</item>
+        <item>km</item>
+    </string-array>
+    <string-array name="liquid_units">
+        <item>litres</item>
+        <item>gallons</item>
+    </string-array>
+</resources>
