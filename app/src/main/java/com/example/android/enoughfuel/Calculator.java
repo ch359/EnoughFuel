@@ -7,10 +7,10 @@ public class Calculator {
 
 
 
-    private int distance;
+    private double distance;
     private Car car;
 
-    public Calculator(int distance, Car car) {
+    public Calculator(double distance, Car car) {
         this.distance = distance;
         this.car = car;
     }
