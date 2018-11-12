@@ -50,8 +50,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void runProgram() {
 
-        Calculator calc = new Calculator(Integer.valueOf(enterDistance.getText().toString()), car);
+        Calculator calc = new Calculator(sanitiseInput(), car);
         result.setText(calc.fuelUse() + "%");
+
+    }
+
+    private double sanitiseInput() {
+        double distance;
+        try {
+            distance = Integer.valueOf(enterDistance.getText().toString());
+        }
+        catch (NumberFormatException e) {
+            System.err.println("Caught NumberFormatException: " + e.getMessage() );
+            distance = 0;
+        }
+
+        return distance;
 
     }
 }
