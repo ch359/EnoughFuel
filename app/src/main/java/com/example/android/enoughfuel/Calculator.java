@@ -7,7 +7,7 @@ public class Calculator {
 
 
 
-    private int distance;  // todo deal with non-miles
+    private int distance;
     private Car car;
 
     public Calculator(int distance, Car car) {

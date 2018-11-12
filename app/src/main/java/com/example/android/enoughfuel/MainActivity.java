@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
         distance_spinner.setAdapter(distance_adapter);
         carName = (TextView) findViewById(R.id.carDescription);
         carTank = (TextView) findViewById(R.id.fuelTankSize);
-        car = new Car(7); // TODO accept variable inputs
+        car = new Car(7, "gallons");
         carName.setText(car.getName());
-        carTank.setText((String.valueOf(car.getFuelTankCapacityInGallons())));
+        carTank.setText(car.getFuelTankCapacity());
         enterDistance = (TextView) findViewById(R.id.enterDistance);
     }
 
