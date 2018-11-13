@@ -40,4 +40,17 @@ public final class Conversions {
         return fuelTank;
     }
 
+    public static Map<String, Double> storeDistances(double distance, String units) {
+        Map<String, Double> distanceAllUnits = new HashMap<>();
+        if (units.toLowerCase().equals("miles")) {
+            distanceAllUnits.put(units.toLowerCase(), distance);
+            distanceAllUnits.put("km", milesToKm(distance));
+        }
+        else if (units.toLowerCase().equals("km")) {
+            distanceAllUnits.put(units.toLowerCase(), distance);
+            distanceAllUnits.put("miles", kmToMiles(distance));
+        }
+        return distanceAllUnits;
+    }
+
 }
