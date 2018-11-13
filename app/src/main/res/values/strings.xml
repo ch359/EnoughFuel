@@ -8,4 +8,8 @@
         <item>litres</item>
         <item>gallons</item>
     </string-array>
+    <string-array name="fuel_economy_units">
+        <item>mpg</item>
+    </string-array>
+    <string name="title_activity_car_details">CarDetails</string>
 </resources>
