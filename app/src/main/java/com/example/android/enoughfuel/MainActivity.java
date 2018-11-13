@@ -3,12 +3,13 @@ package com.example.android.enoughfuel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Button clicky_button;
     TextView result;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     TextView carName;
     TextView carTank;
     Car car;
+    String distanceUnit;
 
 
     @Override
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         carName.setText(car.getName());
         carTank.setText(car.displayFuelTankCapacity("gallons"));
         enterDistance = (TextView) findViewById(R.id.enterDistance);
+        distance_spinner.setOnItemSelectedListener(this);
     }
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
@@ -44,14 +47,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
-
-
-
     private void runProgram() {
 
-        Calculator calc = new Calculator(sanitiseInput(), car);
+        Calculator calc = new Calculator(sanitiseInput(), distanceUnit, car);
         result.setText(calc.fuelUse() + "%");
+
 
     }
 
@@ -67,5 +67,15 @@ public class MainActivity extends AppCompatActivity {
 
         return distance;
 
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        distanceUnit = adapterView.getItemAtPosition(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        //Method stub
     }
 }

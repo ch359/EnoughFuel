@@ -1,22 +1,23 @@
 package com.example.android.enoughfuel;
 
+import java.util.Map;
+
 /**
  * Created by ragnar on 09/11/2018.
  */
 public class Calculator {
 
-
-
-    private double distance;
     private Car car;
+    private Map<String, Double> distanceAllUnits;
 
-    public Calculator(double distance, Car car) {
-        this.distance = distance;
+
+    public Calculator(double distance, String distanceUnit, Car car) {
+        distanceAllUnits = Conversions.storeDistances(distance, distanceUnit);
         this.car = car;
     }
 
     public double fuelUse() {
-        double fuelNeeded = distance / car.getMpg();
+        double fuelNeeded = distanceAllUnits.get("miles") / car.getMpg();
         return (fuelNeeded / car.getFuelTankInGallons()) * 100;
     }
 
