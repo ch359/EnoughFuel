@@ -13,13 +13,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText carMakeButton;
 
     EditText carTank;
-    String carName;
     Double fuelTankSize;
 
     Spinner fuelTankSpinner;
@@ -145,23 +145,16 @@ public class MainActivity extends AppCompatActivity {
         car = new Car(Double.valueOf(carTank.getText().toString()), fuelTankUnit) ;
 
         Calculator calc = new Calculator(Double.valueOf(enterDistance.getText().toString()), distanceUnit, car);
-        result.setText(calc.fuelUse() + "%");
+        result.setText(displayResult(calc.fuelUse()));
 
 
     }
 
-//    private double sanitiseInput() {
-//        double distance;
-//        try {
-//            distance = Integer.valueOf(enterDistance.getText().toString());
-//        }
-//        catch (NumberFormatException e) {
-//            System.err.println("Caught NumberFormatException: " + e.getMessage() );
-//            distance = 0;
-//        }
-//
-//        return distance;
-//
-//    }
+    private String displayResult(Double result) {
+        DecimalFormat df = new DecimalFormat("###.##");
+        return df.format(result) + "%";
+    }
+
+
 
 }

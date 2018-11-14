@@ -1,5 +1,6 @@
 package com.example.android.enoughfuel;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 /**
@@ -16,9 +17,10 @@ public class Calculator {
         this.car = car;
     }
 
-    public double fuelUse() {
+    public Double fuelUse() {
         double fuelNeeded = distanceAllUnits.get("miles") / car.getMpg();
-        return (fuelNeeded / car.getFuelTankInGallons()) * 100;
+        return ((fuelNeeded / car.getFuelTankInGallons()) * 100);
+
     }
 
 
