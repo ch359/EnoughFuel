@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,7 +14,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Objects;
+
+import pl.pawelkleczkowski.customgauge.CustomGauge;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button clicky_button;
     TextView result;
+
+    CustomGauge gauge;
 
 
 
@@ -107,6 +114,9 @@ public class MainActivity extends AppCompatActivity {
         clicky_button.setEnabled(false);
         result = (TextView) findViewById(R.id.result);
 
+        gauge = (CustomGauge) findViewById(R.id.gauge);
+
+
 
 
     }
@@ -114,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            if (inputManager != null) {
+                inputManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
             runProgram();
         }
     };
@@ -145,15 +159,26 @@ public class MainActivity extends AppCompatActivity {
         car = new Car(Double.valueOf(carTank.getText().toString()), fuelTankUnit) ;
 
         Calculator calc = new Calculator(Double.valueOf(enterDistance.getText().toString()), distanceUnit, car);
-        result.setText(displayResult(calc.fuelUse()));
+        Double rawResult = calc.fuelUse();
+        result.setText(displayResult(rawResult));
+        populateGauge(rawResult);
+    }
 
-
+    private void populateGauge(Double rawResult) {
+        int fuelGaugeTopLimit = 180;
+        int fuelGaugeMarker = fuelGaugeTopLimit - (int) Math.round(fuelGaugeTopLimit * rawResult/100);
+        if (fuelGaugeMarker < fuelGaugeTopLimit) {
+            gauge.setPointSize(0);
+        }
+        else
+            gauge.setPointSize(fuelGaugeMarker);
     }
 
     private String displayResult(Double result) {
         DecimalFormat df = new DecimalFormat("###.##");
         return df.format(result) + "%";
     }
+
 
 
 
