@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     private void populateGauge(Double rawResult) {
         int fuelGaugeTopLimit = 180;
         int fuelGaugeMarker = fuelGaugeTopLimit - (int) Math.round(fuelGaugeTopLimit * rawResult/100);
-        if (fuelGaugeMarker < fuelGaugeTopLimit) {
+        if (fuelGaugeMarker > fuelGaugeTopLimit) {
             gauge.setPointSize(0);
         }
         else
